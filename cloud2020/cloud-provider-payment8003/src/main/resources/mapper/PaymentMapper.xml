@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="springcloud.dao.PaymentDao">
+
+    <resultMap id="BaseResultMap" type="com.whwxuexi.springcloud.entities.Payment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="serial" property="serial" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO payment(SERIAL) VALUES(#{serial});
+    </insert>
+
+    <select id="getPaymentById" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+        SELECT * FROM payment WHERE id=#{id};
+    </select>
+    <select id="getPaymentByList" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+        SELECT * FROM payment ;
+    </select>
+
+    <resultMap id="resultMenu" type="springcloud.entity.Menu">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="order" property="order" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="findTree" parameterType="java.lang.Long" resultMap="resultMenu" >
+        SELECT * FROM product_content ;
+    </select>
+
+</mapper>
+
+
+
+
+
+
